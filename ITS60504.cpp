@@ -8,19 +8,14 @@ using namespace std;
 using namespace chrono;
 
 // function to generate random array with allowed repetition
-
-
 void generateRandomArray(int arr[], int n){
-
     srand(time(0));  
     for (int i = 0; i < n; i++) {
         arr[i] = rand() % 99 + 1; 
     }
 }
 
-// Merge Sort
-
-// Function to create merge
+// function to create Merge 
 void merge(int arr[], int left, int mid, int right) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -32,14 +27,16 @@ void merge(int arr[], int left, int mid, int right) {
     R[j] = arr[mid + 1 + j];
 
     int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
+    while (i < n1 && j < n2)
+    {
+    if (L[i] <= R[j]) arr[k++] = L[i++];
+    else arr[k++] = R[j++];
     }
     while (i < n1) arr[k++] = L[i++];
     while (j < n2) arr[k++] = R[j++];
 }
 
+// function to create mergeSort
 void mergeSort(int arr[], int left, int right) {
     if (left < right) {
         int mid = (left + right) / 2;
@@ -49,7 +46,7 @@ void mergeSort(int arr[], int left, int right) {
     }
 }
 
-// Quick Sort
+// function parition
 int partition(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
@@ -63,6 +60,7 @@ int partition(int arr[], int low, int high) {
     return i + 1;
 }
 
+//function quickSort
 void quickSort(int arr[], int low, int high){
     if (low < high) {
         int pi = partition(arr, low, high);
@@ -71,7 +69,7 @@ void quickSort(int arr[], int low, int high){
     }
 }
 
-// Binary Search
+// binary search
 int binarySearch(int arr[], int n, int key) {
     int low = 0, high = n - 1;
     while (low <= high) {
@@ -83,7 +81,7 @@ int binarySearch(int arr[], int n, int key) {
     return -1;
 }
 
-// Exponential Search
+// exponential search
 int exponentialSearch(int arr[], int n, int key) {
     if (arr[0] == key) return 0;
 
@@ -102,13 +100,13 @@ int exponentialSearch(int arr[], int n, int key) {
     return -1;
 }
 
-// Display Array
+// display array
 void displayArray(int arr[], int n) {
     for (int i = 0; i < n; i++) cout << arr[i] << " ";
     cout << endl;
 }
 
-// MAIN
+// main class
 int main() {
     int n;
     cout << "Enter number of elements (max 150): ";
@@ -124,7 +122,7 @@ int main() {
     cout << "\nRandom array:\n";
     displayArray(arr, n);
 
-    // Merge Sort
+    // merge sort runtime
     int mergeArr[150];
     copy(arr, arr + n, mergeArr);
     auto start = high_resolution_clock::now();
@@ -134,7 +132,7 @@ int main() {
     displayArray(mergeArr, n);
     cout << "\nMerge Sort time: " << duration_cast<nanoseconds>(stop - start).count() << " nanoseconds\n";
 
-    // Quick Sort
+    // quick sort runtime
     int quickArr[150];
     copy(arr, arr + n, quickArr);
     start = high_resolution_clock::now();
@@ -144,12 +142,12 @@ int main() {
     displayArray(quickArr, n);
     cout << "\nQuick Sort time: " << duration_cast<nanoseconds>(stop - start).count() << " nanoseconds\n";
 
-    // Search key input
+    // number to search 
     int key;
     cout << "\nEnter number to search: ";
     cin >> key;
 
-    // Binary Search
+    // binary search runtime
     start = high_resolution_clock::now();
     int binaryIndex = binarySearch(quickArr, n, key);
     stop = high_resolution_clock::now();
@@ -160,7 +158,7 @@ int main() {
         cout << "Not found.\n";
     cout << "\nBinary Search time: " << duration_cast<nanoseconds>(stop - start).count() << " nanoseconds\n";
 
-    // Exponential Search
+    // exponential search runtime
     start = high_resolution_clock::now();
     int expoIndex = exponentialSearch(quickArr, n, key);
     stop = high_resolution_clock::now();
